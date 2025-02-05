@@ -37,8 +37,13 @@ Fill in your Supabase credentials:
 
 NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+
 bash
 npm run dev
+
+### Database Setup
+Run the following SQL in your Supabase SQL editor:
+
 sql
 -- Create business_profiles table
 CREATE TABLE business_profiles (
@@ -54,6 +59,7 @@ created_at TIMESTAMP WITH TIME ZONE DEFAULT TIMEZONE('utc'::text, NOW()) NOT NUL
 updated_at TIMESTAMP WITH TIME ZONE DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL,
 PRIMARY KEY (user_id)
 );
+
 -- Enable RLS
 ALTER TABLE business_profiles ENABLE ROW LEVEL SECURITY;
 
@@ -65,6 +71,7 @@ CREATE POLICY "Users can update own profile"
 ON business_profiles FOR UPDATE
 USING (auth.uid() = user_id);
 
+## Project Structure
 requirepay/
 ├── src/
 │ ├── app/
