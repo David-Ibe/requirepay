@@ -1,8 +1,31 @@
 "use client"
 
-import Image from "next/image"
+import React from "react"
 
-const categories = [
+interface Article {
+  title: string;
+  href: string;
+}
+
+interface Category {
+  title: string;
+  icon: React.ReactNode;
+  articles: Article[];
+}
+
+interface PopularArticle {
+  title: string;
+  category: string;
+  views: number;
+}
+
+interface TroubleshootingGuide {
+  title: string;
+  description: string;
+  steps: string[];
+}
+
+const categories: Category[] = [
   {
     title: "Getting Started",
     icon: (
@@ -11,23 +34,9 @@ const categories = [
       </svg>
     ),
     articles: [
-      { title: "How to create an account", href: "#" },
-      { title: "Setting up your first payment", href: "#" },
-      { title: "Understanding our pricing", href: "#" },
-    ],
-  },
-  {
-    title: "Account & Settings",
-    icon: (
-      <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-      </svg>
-    ),
-    articles: [
-      { title: "Managing your profile", href: "#" },
-      { title: "Security settings", href: "#" },
-      { title: "API keys and webhooks", href: "#" },
+      { title: "Creating an Account", href: "#" },
+      { title: "Verifying Your Identity", href: "#" },
+      { title: "Setting Up Your Profile", href: "#" },
     ],
   },
   {
@@ -38,65 +47,81 @@ const categories = [
       </svg>
     ),
     articles: [
-      { title: "Processing payments", href: "#" },
-      { title: "Handling refunds", href: "#" },
-      { title: "Payment methods", href: "#" },
+      { title: "Making a Payment", href: "#" },
+      { title: "Payment Methods", href: "#" },
+      { title: "Payment Limits", href: "#" },
     ],
   },
-]
+  {
+    title: "Security",
+    icon: (
+      <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+      </svg>
+    ),
+    articles: [
+      { title: "Two-Factor Authentication", href: "#" },
+      { title: "Password Security", href: "#" },
+      { title: "Account Protection", href: "#" },
+    ],
+  },
+];
 
-const popularArticles = [
+const popularArticles: PopularArticle[] = [
   {
-    title: "How to handle failed payments",
-    category: "Troubleshooting",
-    views: "2.5k",
+    title: "How to Reset Your Password",
+    category: "Account Security",
+    views: 1250,
   },
   {
-    title: "Setting up webhooks",
-    category: "Integration",
-    views: "1.8k",
-  },
-  {
-    title: "Understanding payment statuses",
+    title: "Understanding Transaction Fees",
     category: "Payments",
-    views: "1.5k",
+    views: 980,
   },
   {
-    title: "API rate limits explained",
-    category: "API",
-    views: "1.2k",
+    title: "Setting Up Auto-Payments",
+    category: "Payments",
+    views: 850,
   },
-]
+  {
+    title: "Verifying Your Identity",
+    category: "Account Security",
+    views: 720,
+  },
+];
 
-const troubleshootingGuides = [
+const troubleshootingGuides: TroubleshootingGuide[] = [
   {
-    title: "Payment Processing Issues",
-    description: "Common payment processing problems and their solutions",
+    title: "Payment Failed",
+    description: "Steps to resolve failed payment issues",
     steps: [
-      "Check payment method support",
-      "Verify account settings",
-      "Review error messages",
+      "Check your payment method details",
+      "Verify sufficient funds",
+      "Contact your bank if needed",
+      "Try an alternative payment method",
     ],
   },
   {
-    title: "Integration Problems",
-    description: "Solutions for common integration challenges",
+    title: "Account Access Issues",
+    description: "Troubleshoot login and access problems",
     steps: [
-      "Validate API keys",
-      "Check webhook configuration",
-      "Test endpoints",
+      "Clear browser cache and cookies",
+      "Try resetting your password",
+      "Check for system maintenance",
+      "Contact support if issues persist",
     ],
   },
   {
-    title: "Account Access",
-    description: "Resolve account access and authentication issues",
+    title: "Transaction Disputes",
+    description: "Resolve transaction-related issues",
     steps: [
-      "Reset password",
-      "Enable 2FA",
-      "Contact support",
+      "Review transaction details",
+      "Gather supporting documentation",
+      "Submit dispute through dashboard",
+      "Follow up with support team",
     ],
   },
-]
+];
 
 export default function HelpCenterPage() {
   return (

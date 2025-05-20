@@ -192,7 +192,7 @@ export default function DocumentationPage() {
           <div className="max-w-xl mx-auto text-center">
             <h2 className="text-3xl font-bold mb-4">Need Help?</h2>
             <p className="text-gray-600 mb-8">
-              Can't find what you're looking for? Our support team is here to help.
+              Can&apos;t find what you&apos;re looking for? Our support team is here to help.
             </p>
             <a
               href="/resources/contact-support"
@@ -200,6 +200,7 @@ export default function DocumentationPage() {
             >
               Contact Support
             </a>
+            <p className="text-gray-600">Don&apos;t have an account? <a href="/register" className="text-blue-600 hover:underline">Sign up</a></p>
           </div>
         </div>
       </section>

@@ -58,7 +58,7 @@ const departmentLeads = [
     name: "Tom Wilson",
     role: "Head of Security",
     image: "/team/tom-wilson.jpg",
-    bio: "Protecting our platform and our customers' data.",
+    bio: "Protecting our platform and our customers\' data.",
   },
   {
     name: "Rachel Adams",
@@ -79,7 +79,7 @@ export default function TeamPage() {
               Meet Our Team
             </h1>
             <p className="text-xl text-gray-600">
-              The passionate people behind RequirePay's mission to revolutionize global payments.
+              The passionate people behind RequirePay&apos;s mission to revolutionize global payments.
             </p>
           </div>
         </div>
@@ -145,7 +145,7 @@ export default function TeamPage() {
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-3xl font-bold mb-6">Join Our Team</h2>
             <p className="text-xl text-gray-600 mb-8">
-              We're always looking for talented individuals to join our mission.
+              We&apos;re always looking for talented individuals to join our mission.
             </p>
             <a
               href="/company/careers"

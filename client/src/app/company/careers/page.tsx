@@ -1,56 +1,34 @@
 "use client"
 
-import Image from "next/image"
+import React from "react"
 
-const openPositions = [
-  {
-    title: "Senior Backend Engineer",
-    department: "Engineering",
-    location: "Remote",
-    type: "Full-time",
-    description: "Build and scale our payment processing infrastructure.",
-  },
-  {
-    title: "Product Manager",
-    department: "Product",
-    location: "San Francisco, CA",
-    type: "Full-time",
-    description: "Lead the development of new payment products.",
-  },
-  {
-    title: "UX Designer",
-    department: "Design",
-    location: "Remote",
-    type: "Full-time",
-    description: "Create intuitive experiences for our payment platform.",
-  },
-  {
-    title: "Account Executive",
-    department: "Sales",
-    location: "New York, NY",
-    type: "Full-time",
-    description: "Drive business growth through enterprise sales.",
-  },
-  {
-    title: "Security Engineer",
-    department: "Security",
-    location: "Remote",
-    type: "Full-time",
-    description: "Protect our platform and customer data.",
-  },
-  {
-    title: "Customer Success Manager",
-    department: "Customer Success",
-    location: "London, UK",
-    type: "Full-time",
-    description: "Help our customers succeed with RequirePay.",
-  },
-]
+interface Benefit {
+  title: string;
+  description: string;
+  icon: React.ReactNode;
+}
 
-const benefits = [
+interface Position {
+  title: string;
+  department: string;
+  location: string;
+  type: string;
+  description: string;
+}
+
+const benefits: Benefit[] = [
+  {
+    title: "Competitive Compensation",
+    description: "We offer competitive salaries and equity packages",
+    icon: (
+      <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    ),
+  },
   {
     title: "Health & Wellness",
-    description: "Comprehensive health, dental, and vision coverage for you and your family",
+    description: "Comprehensive health coverage and wellness programs",
     icon: (
       <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
@@ -58,51 +36,39 @@ const benefits = [
     ),
   },
   {
-    title: "Flexible Time Off",
-    description: "Unlimited PTO policy that encourages work-life balance",
-    icon: (
-      <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-      </svg>
-    ),
-  },
-  {
-    title: "Remote Work",
-    description: "Work from anywhere with our distributed-first approach",
-    icon: (
-      <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-      </svg>
-    ),
-  },
-  {
-    title: "Stock Options",
-    description: "Equity in a fast-growing fintech company",
-    icon: (
-      <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-      </svg>
-    ),
-  },
-  {
-    title: "Learning Budget",
-    description: "Annual budget for professional development",
+    title: "Learning & Development",
+    description: "Continuous learning opportunities and career growth",
     icon: (
       <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
       </svg>
     ),
   },
+];
+
+const openPositions: Position[] = [
   {
-    title: "Team Events",
-    description: "Regular virtual and in-person team gatherings",
-    icon: (
-      <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-      </svg>
-    ),
+    title: "Senior Software Engineer",
+    department: "Engineering",
+    location: "Remote",
+    type: "Full-time",
+    description: "Join our core engineering team to build scalable payment solutions",
   },
-]
+  {
+    title: "Product Manager",
+    department: "Product",
+    location: "San Francisco",
+    type: "Full-time",
+    description: "Lead product development for our payment processing platform",
+  },
+  {
+    title: "Customer Success Manager",
+    department: "Customer Success",
+    location: "Remote",
+    type: "Full-time",
+    description: "Help our customers succeed with our payment solutions",
+  },
+];
 
 export default function CareersPage() {
   return (

@@ -1,5 +1,3 @@
-import Image from "next/image"
-
 export default function MoneyTransfer() {
   return (
     <main className="min-h-screen">
@@ -67,7 +65,7 @@ export default function MoneyTransfer() {
                 </div>
                 <div>
                   <h3 className="text-xl font-semibold mb-2">Enter transfer details</h3>
-                  <p className="text-gray-600">Choose the amount to send and select your recipient's country</p>
+                  <p className="text-gray-600">Choose the amount to send and select your recipient&apos;s country</p>
                 </div>
               </div>
               <div className="flex items-start gap-6">
@@ -76,7 +74,7 @@ export default function MoneyTransfer() {
                 </div>
                 <div>
                   <h3 className="text-xl font-semibold mb-2">Add recipient</h3>
-                  <p className="text-gray-600">Enter your recipient's bank details or choose from saved recipients</p>
+                  <p className="text-gray-600">Enter your recipient&apos;s bank details or choose from saved recipients</p>
                 </div>
               </div>
               <div className="flex items-start gap-6">

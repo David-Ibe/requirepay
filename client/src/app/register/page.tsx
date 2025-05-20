@@ -8,8 +8,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { countryCodes } from "@/lib/country-codes";
-import supabase from "@/lib/supabase";
-import toast from 'react-hot-toast';
 
 // Add this type for form data
 interface FormData {
@@ -38,7 +36,6 @@ export default function RegisterPage() {
     countryCode: ''
   });
 
-  const [countryCode, setCountryCode] = useState(countryCodes[0].dial_code);
   const [selectedCountry, setSelectedCountry] = useState(countryCodes[0]);
   const [showPassword] = useState(false);
   const [agreedToTerms, setAgreedToTerms] = useState(false);
@@ -54,7 +51,6 @@ export default function RegisterPage() {
     const country = countryCodes.find((c) => c.dial_code === e.target.value);
     if (country) {
       setSelectedCountry(country);
-      setCountryCode(country.dial_code);
     }
   };
 
@@ -66,82 +62,19 @@ export default function RegisterPage() {
     setFormData((prev) => ({ ...prev, businessWebsite: value }));
   };
 
+  // Demo handler: just redirect to verification if terms are agreed and form is filled
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
-    
     if (!agreedToTerms) {
       setError("Please agree to the terms and conditions.");
       return;
     }
-
     setError(null);
     setLoading(true);
-
-    try {
-      // Prepare profile data
-      const profileData = {
-        email: formData.email.toLowerCase().trim(),
-        first_name: formData.firstName,
-        last_name: formData.lastName,
-        business_name: formData.businessName,
-        business_website: formData.businessWebsite || null,
-        phone_number: formData.phoneNumber ? `${countryCode}${formData.phoneNumber}` : null,
-        country_code: selectedCountry.code
-      };
-
-      // Create auth user
-      const { data: authData, error: authError } = await supabase.auth.signUp({
-        email: formData.email.toLowerCase().trim(),
-        password: formData.password,
-        options: {
-          data: {
-            first_name: formData.firstName,
-            last_name: formData.lastName,
-          },
-        },
-      });
-
-      console.log('Auth Response:', { authData, authError }); // Debug log
-
-      if (authError) throw new Error(authError.message || "Failed to create account.");
-      if (!authData.user?.id) throw new Error("User registration incomplete.");
-
-      // Create business profile immediately
-      const { data: profile, error: profileError } = await supabase
-        .from('business_profiles')
-        .insert({
-          user_id: authData.user.id,
-          ...profileData
-        })
-        .select()
-        .single();
-
-      if (profileError) {
-        console.error('Profile Creation Error:', profileError);
-        throw new Error('Failed to create business profile');
-      }
-
-      console.log('Profile Created:', profile);
-
-      toast.success('Registration successful! Please check your email to verify your account.', {
-        duration: 5000,
-      });
-      
-      router.push('/verification?email=' + encodeURIComponent(formData.email));
-
-    } catch (err) {
-      console.error("Full Registration Error:", err);
-      const errorMessage = err instanceof Error 
-        ? err.message 
-        : "Registration failed. Please try again.";
-      
-      setError(errorMessage);
-      toast.error(errorMessage, {
-        duration: 4000,
-      });
-    } finally {
+    setTimeout(() => {
       setLoading(false);
-    }
+      router.push('/verification?email=' + encodeURIComponent(formData.email));
+    }, 1000);
   };
 
   return (

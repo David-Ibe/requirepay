@@ -1,7 +1,5 @@
 "use client"
 
-import Image from "next/image"
-
 export default function AboutPage() {
   return (
     <main className="min-h-screen">
@@ -46,7 +44,7 @@ export default function AboutPage() {
               </div>
               <h3 className="text-xl font-semibold mb-3">Trust & Security</h3>
               <p className="text-gray-600">
-                We prioritize the security of our customers' data and transactions above everything else.
+                We prioritize the security of our customers&apos; data and transactions above everything else.
               </p>
             </div>
             <div className="bg-white p-8 rounded-xl shadow-sm">

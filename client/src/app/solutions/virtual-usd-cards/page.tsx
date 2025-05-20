@@ -1,5 +1,3 @@
-import Image from "next/image"
-
 export default function VirtualUSDCards() {
   return (
     <main className="min-h-screen">

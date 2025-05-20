@@ -1,10 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import supabase from "@/lib/supabase";
-import { toast } from "react-hot-toast";
 import ProfileEditor from "@/components/ProfileEditor";
 
 interface UserProfile {
@@ -20,44 +18,19 @@ interface UserProfile {
 
 export default function DashboardPage() {
   const router = useRouter();
-  const [userName, setUserName] = useState("");
-  const [profile, setProfile] = useState<UserProfile | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [showWelcome, setShowWelcome] = useState(false);
-
-  const checkAuth = async () => {
-    try {
-      const { data: { session } } = await supabase.auth.getSession();
-      
-      if (!session) {
-        router.push('/login');
-        return;
-      }
-
-      const { data: existingProfile, error: profileError } = await supabase
-        .from('business_profiles')
-        .select('*')
-        .eq('user_id', session.user.id)
-        .single();
-
-      if (profileError) {
-        throw profileError;
-      }
-
-      setProfile(existingProfile);
-      setUserName(existingProfile.first_name);
-
-    } catch (error) {
-      console.error('Dashboard error:', error);
-      toast.error('Failed to load profile');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    checkAuth();
-  }, [router]);
+  const [userName] = useState("Demo User");
+  const [profile] = useState<UserProfile>({
+    user_id: "demo-user",
+    email: "demo@example.com",
+    first_name: "Demo",
+    last_name: "User",
+    business_name: "Demo Business",
+    business_website: "https://example.com",
+    phone_number: "+1234567890",
+    country_code: "+1"
+  });
+  const [loading] = useState(false);
+  const [showWelcome, setShowWelcome] = useState(true);
 
   // Handle welcome message dismissal
   const handleDismissWelcome = () => {
@@ -66,7 +39,8 @@ export default function DashboardPage() {
   };
 
   const handleProfileUpdate = () => {
-    checkAuth();
+    // Demo profile update
+    console.log('Profile updated');
   };
 
   if (loading) {
@@ -89,7 +63,7 @@ export default function DashboardPage() {
             <div className="flex items-center space-x-4">
               <span className="text-gray-600">Welcome, {userName}</span>
               <button
-                onClick={() => supabase.auth.signOut().then(() => router.push('/login'))}
+                onClick={() => router.push('/login')}
                 className="text-gray-600 hover:text-gray-900"
               >
                 Sign out
@@ -173,21 +147,10 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        {profile && (
-          <ProfileEditor 
-            profile={{
-              user_id: profile.user_id,
-              email: profile.email,
-              first_name: profile.first_name,
-              last_name: profile.last_name,
-              business_name: profile.business_name,
-              business_website: profile.business_website,
-              phone_number: profile.phone_number,
-              country_code: profile.country_code
-            }}
-            onUpdate={handleProfileUpdate} 
-          />
-        )}
+        <ProfileEditor 
+          profile={profile}
+          onUpdate={handleProfileUpdate} 
+        />
       </main>
     </div>
   );

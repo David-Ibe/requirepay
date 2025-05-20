@@ -1,5 +1,3 @@
-import Image from "next/image"
-
 export default function PaymentLinks() {
   return (
     <main className="min-h-screen">

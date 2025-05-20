@@ -1,5 +1,3 @@
-import Image from "next/image"
-
 export default function Payout() {
   return (
     <main className="min-h-screen">
@@ -67,7 +65,7 @@ export default function Payout() {
                 </div>
                 <div>
                   <h3 className="text-xl font-semibold mb-2">Upload recipient details</h3>
-                  <p className="text-gray-600">Add your recipients' information manually or via CSV upload</p>
+                  <p className="text-gray-600">Add your recipients&apos; information manually or via CSV upload</p>
                 </div>
               </div>
               <div className="flex items-start gap-6">

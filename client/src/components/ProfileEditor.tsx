@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
-import supabase from '@/lib/supabase';
 
 interface ProfileEditorProps {
   profile: {
@@ -40,20 +39,9 @@ export default function ProfileEditor({ profile, onUpdate }: ProfileEditorProps)
     setLoading(true);
 
     try {
-      const { error } = await supabase
-        .from('business_profiles')
-        .update({
-          first_name: formData.first_name,
-          last_name: formData.last_name,
-          business_name: formData.business_name,
-          business_website: formData.business_website || null,
-          phone_number: formData.phone_number || null,
-          country_code: formData.country_code || null
-        })
-        .eq('user_id', profile.user_id);
-
-      if (error) throw error;
-
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
       toast.success('Profile updated successfully');
       setIsEditing(false);
       onUpdate();
