@@ -1,113 +1,117 @@
-# RequirePay - Business Payment Platform
+# RequirePay
 
-## Overview
-RequirePay is a modern business payment platform built with Next.js, Supabase, and TypeScript. It provides businesses with user authentication, profile management, and payment processing capabilities.
+RequirePay is a modern financial management platform that provides seamless access to corporate cards, multi-currency accounts, and global payouts, all in one account. Built with Next.js and TypeScript, it offers a robust and user-friendly interface for businesses to manage their financial operations.
 
 ## Features
-- 🔐 Secure Authentication with Email Verification
-- 👤 Business Profile Management
-- 💼 Dashboard Interface
-- 🎨 Responsive Design with Tailwind CSS
-- 🔄 Real-time Updates
-- ⚡ Fast Performance
-- 📱 Mobile-Friendly Interface
+
+- **User Authentication**
+  - Secure login and registration system
+  - Password recovery functionality
+  - Session management
+
+- **Dashboard**
+  - Overview of financial metrics
+  - Recent transactions
+  - Quick access to key features
+
+- **Profile Management**
+  - User profile customization
+  - Business information management
+  - Settings configuration
+
+- **Modern UI/UX**
+  - Responsive design
+  - Dark mode support
+  - Intuitive navigation
+  - Loading states and animations
 
 ## Tech Stack
-- **Frontend**: Next.js 14, TypeScript, Tailwind CSS
-- **Backend**: Supabase (Auth, Database)
-- **State Management**: React Hooks
-- **Styling**: Tailwind CSS
-- **Forms**: React Hook Form
-- **Notifications**: React Hot Toast
+
+- **Frontend**
+  - Next.js 14 (App Router)
+  - TypeScript
+  - Tailwind CSS
+  - Shadcn UI Components
+  - React Hook Form
+  - Zod Validation
+
+- **Development Tools**
+  - ESLint
+  - Prettier
+  - TypeScript
+  - Husky (Git hooks)
 
 ## Getting Started
 
 ### Prerequisites
-- Node.js 18+ 
-- npm or yarn
-- Supabase account
+
+- Node.js 18.0 or later
+- npm or yarn package manager
 
 ### Installation
-1. Clone the repository
-bash
-git clone https://github.com/yourusername/requirepay.git
-cd requirepay
 
-Fill in your Supabase credentials:
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/requirepay.git
+   cd requirepay
+   ```
 
-NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+2. Install dependencies:
+   ```bash
+   cd client
+   npm install
+   ```
 
-bash
-npm run dev
+3. Create a `.env.local` file in the client directory with the following variables:
+   ```
+   NEXT_PUBLIC_APP_URL=http://localhost:3000
+   ```
 
-### Database Setup
-Run the following SQL in your Supabase SQL editor:
+4. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-sql
--- Create business_profiles table
-CREATE TABLE business_profiles (
-user_id UUID REFERENCES auth.users(id),
-email TEXT NOT NULL,
-first_name TEXT NOT NULL,
-last_name TEXT NOT NULL,
-business_name TEXT NOT NULL,
-business_website TEXT,
-phone_number TEXT,
-country_code TEXT,
-created_at TIMESTAMP WITH TIME ZONE DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL,
-updated_at TIMESTAMP WITH TIME ZONE DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL,
-PRIMARY KEY (user_id)
-);
-
--- Enable RLS
-ALTER TABLE business_profiles ENABLE ROW LEVEL SECURITY;
-
--- Create policies
-CREATE POLICY "Users can view own profile"
-ON business_profiles FOR SELECT
-USING (auth.uid() = user_id);
-CREATE POLICY "Users can update own profile"
-ON business_profiles FOR UPDATE
-USING (auth.uid() = user_id);
+5. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Project Structure
-requirepay/
+
+```
+client/
 ├── src/
-│ ├── app/
-│ │ ├── dashboard/
-│ │ ├── login/
-│ │ ├── register/
-│ │ └── verification/
-│ ├── components/
-│ │ └── ProfileEditor.tsx
-│ └── lib/
-│ └── supabase.ts
-├── public/
-└── package.json
+│   ├── app/                 # Next.js app router pages
+│   ├── components/          # Reusable UI components
+│   ├── lib/                 # Utility functions and configurations
+│   └── styles/             # Global styles and Tailwind config
+├── public/                 # Static assets
+└── package.json           # Project dependencies and scripts
+```
+
+## Available Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run start` - Start production server
+- `npm run lint` - Run ESLint
+- `npm run format` - Format code with Prettier
 
 ## Contributing
+
 1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
 ## License
+
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Acknowledgments
-- Next.js Team
-- Supabase Team
-- Tailwind CSS Team
-  
-This README provides:
-Project overview
-Feature list
-Tech stack details
-Setup instructions
-Database configuration
-Project structure
-Contributing guidelines
+
+- [Next.js](https://nextjs.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Shadcn UI](https://ui.shadcn.com/)
+- [TypeScript](https://www.typescriptlang.org/)
 
   
