@@ -52,7 +52,7 @@ RequirePay is a modern financial management platform that provides seamless acce
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/requirepay.git
+   git clone https://github.com/David-Ibe/requirepay.git
    cd requirepay
    ```
 
